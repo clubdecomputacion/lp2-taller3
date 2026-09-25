@@ -342,11 +342,3 @@ Verifica:
 - [ ] `docker compose ps` muestra los 3 servicios corriendo.
 - [ ] Puedes explicar, en tus propias palabras, por qué `api` se conecta a `database` (y no a `localhost`) y por qué `web` se conecta a `api` (y no directamente a la base de datos).
 
-## Retos adicionales
-
-1. **Volumen para imágenes:** monta `web/app/static/images` como volumen compartido con `api`, o expón las imágenes directamente desde la API, para no duplicar archivos entre los dos servicios.
-2. **Conteo de productos por categoría en la API:** agrega un campo `total_productos` al esquema `CategoriaBase`, calculado en `crud.py` con una consulta agregada, para poder mostrarlo en `categorias.html`.
-3. **Documentación con ejemplos:** usa el parámetro `examples` de Pydantic para enriquecer la documentación automática de `/docs`.
-4. **Reverse proxy:** agrega un cuarto contenedor con **Nginx** que exponga un único puerto al exterior y enrute `/api/*` hacia `api` y el resto hacia `web`.
-5. **CI simple:** escribe un script que corra `docker compose up --build -d`, espere a que los servicios estén `healthy` y haga una petición de prueba a `/productos/` para validar el despliegue.
-
