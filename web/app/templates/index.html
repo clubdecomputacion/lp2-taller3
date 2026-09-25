@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block titulo %}Catálogo - Tienda Virtual{% endblock %}
+
+{% block contenido %}
+
+<div class="filtros">
+    <a href="{{ url_for('main.index') }}"
+       class="chip {% if not categoria_id %}chip-activo{% endif %}">Todas</a>
+
+    {# TODO 1: Recorre 'categorias' (lista de dicts que llegó de la API) y
+       genera un enlace por cada una hacia
+       url_for('main.index', categoria=categoria.id). Cada dict tiene
+       'id' y 'nombre', accesibles con categoria.id / categoria.nombre. #}
+</div>
+
+<div class="catalogo">
+
+    {# TODO 2: Recorre 'productos' con {% for producto in productos %}.
+       Nota: 'productos' puede llegar como lista vacía si la API no
+       respondió (revisa api_client.py); el template debe soportarlo. #}
+
+    {# TODO 3: Dentro del ciclo, muestra cada producto:
+
+        <div class="tarjeta-producto">
+            <img src="{{ url_for('static', filename=producto.foto) }}" alt="{{ producto.nombre }}">
+            <h3>{{ producto.nombre }}</h3>
+            <p>{{ producto.marca }}</p>
+            <p>{{ producto.categoria.nombre }}</p>
+            <p>${{ "{:,.0f}".format(producto.precio) }}</p>
+
+            TODO 4: usa producto.disponible para mostrar
+            "Disponible" o "Agotado" con {% if %}/{% else %}
+
+            <a href="{{ url_for('main.detalle', sku=producto.sku) }}">Ver detalle</a>
+        </div>
+    #}
+
+    {# TODO 5: Cierra el ciclo con {% endfor %} #}
+
+    {# TODO 6 (opcional): usa {% else %} dentro del for para mostrar un
+       mensaje si 'productos' llega vacía. #}
+
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block titulo %}Categorías - Tienda Virtual{% endblock %}
+
+{% block contenido %}
+<div class="lista-categorias">
+    <h2>Categorías</h2>
+
+    <ul>
+    {# TODO 1: Recorre 'categorias' con un ciclo for. #}
+
+    {# TODO 2: Muestra categoria.nombre, enlazado al catálogo filtrado:
+       <a href="{{ url_for('main.index', categoria=categoria.id) }}">...</a>
+
+       A diferencia del Taller 2, aquí YA NO puedes usar
+       categoria.productos|length (ese backref vivía en el ORM local).
+       Si quieres mostrar el conteo de productos por categoría, la forma
+       correcta en esta arquitectura es que la API lo calcule y lo incluya
+       en la respuesta de /categorias/ (queda como reto opcional). #}
+
+    {# TODO 3: Cierra el ciclo con {% endfor %} #}
+    </ul>
+</div>
+{% endblock %}
