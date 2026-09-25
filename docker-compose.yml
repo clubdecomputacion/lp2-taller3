@@ -1,0 +1,74 @@
+# Orquesta los 3 contenedores de la Tienda Virtual:
+#   database -> PostgreSQL 15 (persistencia)
+#   api      -> FastAPI + SQLAlchemy (lógica de negocio y acceso a datos)
+#   web      -> Flask (frontend, solo consume la API por HTTP)
+#
+# Los tres se comunican a través de la red interna que Docker Compose crea
+# automáticamente para este proyecto. Dentro de esa red, cada servicio es
+# alcanzable usando su NOMBRE como si fuera un hostname (por eso la API usa
+# "database" como host de conexión, y "web" usa "api").
+
+services:
+
+  database:
+    image: postgres:15
+    container_name: lp2taller3-database
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      # Volumen nombrado: los datos sobreviven aunque el contenedor se borre.
+      - db_data:/var/lib/postgresql/data
+    ports:
+      # Exponer el puerto al host es opcional; solo sirve para que puedas
+      # conectarte con un cliente SQL (DBeaver, psql, etc.) desde WSL2/Windows.
+      - "5432:5432"
+    healthcheck:
+      # TODO 1: Completa el comando que verifica si Postgres ya está listo
+      #         para aceptar conexiones. Pista: pg_isready acepta -U <usuario>
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./api
+    container_name: lp2taller3-api
+    restart: unless-stopped
+    environment:
+      # TODO 2: Construye la URL de conexión a PostgreSQL con el formato:
+      #   postgresql://<usuario>:<password>@<host>:<puerto>/<basededatos>
+      #   El host NO es "localhost": es el nombre del servicio "database".
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
+    depends_on:
+      database:
+        # Espera a que el healthcheck de 'database' pase antes de arrancar.
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  web:
+    build:
+      context: ./web
+    container_name: lp2taller3-web
+    restart: unless-stopped
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      # TODO 3: Indica la URL base de la API vista DESDE OTRO CONTENEDOR.
+      #         No es http://localhost:8000 (eso apuntaría al propio
+      #         contenedor 'web'); debe usar el nombre del servicio "api".
+      API_URL: http://api:8000
+    depends_on:
+      # TODO 4: Declara que 'web' depende de que el servicio 'api' esté
+      #         corriendo antes de iniciar (usa la misma sintaxis de arriba,
+      #         puede ser una simple lista si no necesitas esperar un
+      #         healthcheck: depends_on: - api)
+      - api
+    ports:
+      - "5000:5000"
+
+volumes:
+  db_data:
