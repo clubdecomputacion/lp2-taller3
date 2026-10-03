@@ -18,24 +18,40 @@ main = Blueprint("main", __name__)
 @main.route("/")
 def index():
     categoria_id = request.args.get("categoria", type=int)
+    casa_activa = request.args.get("casa")
 
-    # TODO 1: productos = api_client.obtener_productos(categoria_id)
-    # TODO 2: categorias = api_client.obtener_categorias()
-    # TODO 3: render_template("index.html", productos=productos,
-    #                         categorias=categorias, categoria_id=categoria_id)
-    pass
+    productos = api_client.obtener_productos(categoria_id)
+    categorias = api_client.obtener_categorias()
+    casas = sorted(
+        {producto["marca"] for producto in productos if producto.get("marca")}
+    )
+    if casa_activa:
+        productos = [
+            producto for producto in productos
+            if producto.get("marca") == casa_activa
+        ]
+
+    return render_template(
+        "index.html",
+        productos=productos,
+        categorias=categorias,
+        categoria_id=categoria_id,
+        casas=casas,
+        casa_activa=casa_activa,
+    )
 
 
 @main.route("/producto/<sku>")
 def detalle(sku):
-    # TODO 4: producto = api_client.obtener_producto(sku)
-    # TODO 5: si producto es None, abort(404)
-    # TODO 6: render_template("detalle.html", producto=producto)
-    pass
+    producto = api_client.obtener_producto(sku)
+    if producto is None:
+        abort(404)
+    return render_template("detalle.html", producto=producto)
+    
 
 
 @main.route("/categorias")
 def categorias():
-    # TODO 7: categorias = api_client.obtener_categorias()
-    # TODO 8: render_template("categorias.html", categorias=categorias)
-    pass
+    categorias = api_client.obtener_categorias()
+    return render_template("categorias.html", categorias=categorias)
+    

@@ -3,43 +3,66 @@
 {% block titulo %}Catálogo - Tienda Virtual{% endblock %}
 
 {% block contenido %}
+<section class="encabezado-catalogo">
+    <p class="sobrelinea">SELECCIÓN DE PERFUMERÍA</p>
+    <h2>Encuentra tu próxima esencia</h2>
+    <p>Fragancias para cada estilo, momento y personalidad.</p>
+</section>
 
-<div class="filtros">
-    <a href="{{ url_for('main.index') }}"
-       class="chip {% if not categoria_id %}chip-activo{% endif %}">Todas</a>
+<section class="panel-filtros" aria-label="Filtros del catálogo">
+    <div class="grupo-filtro">
+        <h2>Categoría</h2>
+        <div class="opciones-filtro">
+            <a href="{{ url_for('main.index', casa=casa_activa) if casa_activa else url_for('main.index') }}"
+               class="chip {% if not categoria_id %}chip-activo{% endif %}">Todas</a>
+            {% for categoria in categorias %}
+            <a href="{{ url_for('main.index', categoria=categoria.id, casa=casa_activa) if casa_activa else url_for('main.index', categoria=categoria.id) }}"
+               class="chip {% if categoria_id == categoria.id %}chip-activo{% endif %}">
+                {{ categoria.nombre }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
 
-    {# TODO 1: Recorre 'categorias' (lista de dicts que llegó de la API) y
-       genera un enlace por cada una hacia
-       url_for('main.index', categoria=categoria.id). Cada dict tiene
-       'id' y 'nombre', accesibles con categoria.id / categoria.nombre. #}
-</div>
+    <div class="grupo-filtro">
+        <h2>Casa perfumera</h2>
+        <div class="opciones-filtro">
+            <a href="{{ url_for('main.index', categoria=categoria_id) if categoria_id else url_for('main.index') }}"
+               class="chip {% if not casa_activa %}chip-activo{% endif %}">Todas</a>
+            {% for casa in casas %}
+            <a href="{{ url_for('main.index', categoria=categoria_id, casa=casa) if categoria_id else url_for('main.index', casa=casa) }}"
+               class="chip {% if casa_activa == casa %}chip-activo{% endif %}">
+                {{ casa }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
 <div class="catalogo">
-
-    {# TODO 2: Recorre 'productos' con {% for producto in productos %}.
-       Nota: 'productos' puede llegar como lista vacía si la API no
-       respondió (revisa api_client.py); el template debe soportarlo. #}
-
-    {# TODO 3: Dentro del ciclo, muestra cada producto:
-
-        <div class="tarjeta-producto">
-            <img src="{{ url_for('static', filename=producto.foto) }}" alt="{{ producto.nombre }}">
+    {% for producto in productos %}
+    <article class="tarjeta-producto">
+        <div class="imagen-producto">
+            <span class="respaldo-imagen" aria-hidden="true">✦</span>
+            <img src="{{ url_for('static', filename=producto.foto) }}"
+                 alt="{{ producto.nombre }}"
+                 onerror="this.hidden=true">
+        </div>
+        <div class="contenido-tarjeta">
+            <p class="marca-producto">{{ producto.marca }}</p>
             <h3>{{ producto.nombre }}</h3>
-            <p>{{ producto.marca }}</p>
-            <p>{{ producto.categoria.nombre }}</p>
-            <p>${{ "{:,.0f}".format(producto.precio) }}</p>
-
-            TODO 4: usa producto.disponible para mostrar
-            "Disponible" o "Agotado" con {% if %}/{% else %}
-
+            <p class="categoria-producto">{{ producto.categoria.nombre }}</p>
+            <p class="precio-producto">${{ "{:,.0f}".format(producto.precio) }}</p>
+            {% if producto.disponible %}
+            <p class="estado disponible">Disponible</p>
+            {% else %}
+            <p class="estado agotado">Agotado</p>
+            {% endif %}
             <a href="{{ url_for('main.detalle', sku=producto.sku) }}">Ver detalle</a>
         </div>
-    #}
-
-    {# TODO 5: Cierra el ciclo con {% endfor %} #}
-
-    {# TODO 6 (opcional): usa {% else %} dentro del for para mostrar un
-       mensaje si 'productos' llega vacía. #}
-
+    </article>
+    {% else %}
+    <p class="catalogo-vacio">No hay perfumes para estos filtros.</p>
+    {% endfor %}
 </div>
 {% endblock %}

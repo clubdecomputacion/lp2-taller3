@@ -14,10 +14,9 @@ from config import Config
 def create_app(config_class=Config):
     app = Flask(__name__)
 
-    # TODO 1: Carga la configuración: app.config.from_object(config_class)
+    app.config.from_object(config_class)
 
-    # TODO 2: Importa el blueprint 'main' desde .routes y regístralo:
-    #         from .routes import main
-    #         app.register_blueprint(main)
+    from .routes import main
+    app.register_blueprint(main)
 
     return app

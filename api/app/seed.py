@@ -25,27 +25,48 @@ def cargar_datos():
     db = SessionLocal()
 
     try:
-        # TODO 1: Abre RUTA_PRODUCTOS con encoding="utf-8" y usa json.load()
-        #         para obtener la lista de productos.
-        # datos = ...
+        with open(RUTA_PRODUCTOS, "r", encoding="utf-8") as f:
+            datos = json.load(f)
+        
+        cargados = 0
 
-        # TODO 2: Por cada item en 'datos':
-        #   a) Busca la categoría por nombre:
-        #        categoria = db.query(Categoria).filter_by(
-        #            nombre=item["categoria"]).first()
-        #   b) Si no existe, créala, agrégala con db.add(categoria)
-        #      y usa db.flush() para obtener su id sin hacer commit todavía.
-        #   c) Si ya existe un producto con ese sku
-        #      (db.query(Producto).filter_by(sku=item["sku"]).first()),
-        #      sáltalo con 'continue' para no duplicar.
-        #   d) Crea el Producto con los campos del JSON y
-        #      categoria_id=categoria.id, y agrégalo con db.add(producto).
+        for item in datos:
+            categoria = (
+                db.query(Categoria)
+                .filter_by(nombre=item["categoria"])
+                .first()
+            )
+            
+            if categoria is None:
+                categoria = Categoria(nombre=item["categoria"])
+                db.add(categoria)
+                db.flush()
+                
+            producto_existente = (
+                db.query(Producto)
+                .filter_by(sku=item["sku"])
+                .first()
+            )
+            
+            if producto_existente is not None:
+                continue
 
-        # TODO 3: Confirma todo con db.commit()
+            producto = Producto (
+                sku=item["sku"],    
+                marca=item["marca"],
+                nombre=item["nombre"],
+                precio=item["precio"],
+                foto=item.get("foto"),  
+                stock=item["stock"],
+                activo=item["activo"],
+                categoria_id=categoria.id,
+            )
+            db.add(producto)
+            cargados += 1 
 
-        # TODO 4: Imprime cuántos productos se cargaron, por ejemplo:
-        #         print(f"Se cargaron {len(datos)} productos.")
-        pass
+        db.commit()
+        print(f"Se cargaron {cargados} productos.")
+        
     finally:
         db.close()
 

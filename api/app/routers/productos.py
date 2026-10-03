@@ -20,15 +20,14 @@ router = APIRouter(prefix="/productos", tags=["productos"])
 @router.get("/", response_model=List[schemas.ProductoBase])
 def listar_productos(categoria_id: Optional[int] = None, db: Session = Depends(get_db)):
     """Lista productos. Admite ?categoria_id=<id> como filtro opcional."""
-    # TODO 1: llama a crud.obtener_productos(db, categoria_id) y retórnalo
-    pass
+    return crud.obtener_productos(db, categoria_id)
+
 
 
 @router.get("/{sku}", response_model=schemas.ProductoBase)
 def obtener_producto(sku: str, db: Session = Depends(get_db)):
     """Retorna un producto por su SKU, o 404 si no existe."""
-    # TODO 2: producto = crud.obtener_producto_por_sku(db, sku)
-    # TODO 3: si producto es None, lanza:
-    #         raise HTTPException(status_code=404, detail="Producto no encontrado")
-    # TODO 4: si existe, retórnalo (FastAPI lo serializa con ProductoBase)
-    pass
+    producto = crud.obtener_producto_por_sku(db, sku)
+    if producto is None:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    return producto

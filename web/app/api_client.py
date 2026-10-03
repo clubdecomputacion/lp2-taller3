@@ -15,37 +15,48 @@ TIMEOUT = 5  # segundos máximo de espera por respuesta de la API
 
 
 def obtener_productos(categoria_id=None):
-    """Retorna la lista de productos (dicts) desde la API.
+    """Retorna la lista de productos (dicts) desde la API. """
+    
+    url = f"{current_app.config['API_URL']}/productos/"
+    parametros = {}
+    if categoria_id is not None:
+        parametros["categoria_id"] = categoria_id
+        
+    try:
+        respuesta = requests.get(url, params=parametros, timeout=TIMEOUT)
+        if respuesta.status_code == 200:
+            return respuesta.json()
+    except requests.RequestException:
+        return []
 
-    TODO 1: Construye la URL completa:
-            url = f"{current_app.config['API_URL']}/productos/"
-    TODO 2: Arma un diccionario de parámetros; si categoria_id no es None,
-            agrégalo como {"categoria_id": categoria_id}, si es None usa {}.
-    TODO 3: Haz la petición:
-            respuesta = requests.get(url, params=parametros, timeout=TIMEOUT)
-    TODO 4: Si respuesta.status_code == 200, retorna respuesta.json()
-            En cualquier otro caso, retorna una lista vacía [] (para que
-            la página no se rompa si la API está caída).
-    """
-    pass
+    return [] 
 
 
 def obtener_producto(sku):
-    """Retorna un producto (dict) por su SKU, o None si no existe.
+    """Retorna un producto (dict) por su SKU, o None si no existe. """
+    
+    url = f"{current_app.config['API_URL']}/productos/{sku}"
+    
+    try:
+        respuesta = requests.get(url, timeout=TIMEOUT)
+        if respuesta.status_code == 200:
+            return respuesta.json()
+    except requests.RequestException:
+        return None
 
-    TODO 5: Construye la URL:
-            url = f"{current_app.config['API_URL']}/productos/{sku}"
-    TODO 6: Haz la petición GET con requests.get(url, timeout=TIMEOUT)
-    TODO 7: Si respuesta.status_code == 200, retorna respuesta.json()
-            Si es 404 (u otro código), retorna None.
-    """
-    pass
+    return None
 
 
 def obtener_categorias():
     """Retorna la lista de categorías (dicts) desde la API.
+"""
+    
+    url = f"{current_app.config['API_URL']}/categorias/"
+    try:
+        respuesta = requests.get(url, timeout=TIMEOUT)
+        if respuesta.status_code == 200:
+            return respuesta.json()
+    except requests.RequestException:
+        return []
 
-    TODO 8: Igual que obtener_productos() pero apuntando a
-            f"{current_app.config['API_URL']}/categorias/" y sin parámetros.
-    """
-    pass
+    return []   

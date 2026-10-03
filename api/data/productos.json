@@ -1,32 +1,302 @@
 [
   {
-    "sku": "TEC-001",
-    "marca": "Logitech",
-    "nombre": "Mouse inalámbrico MX Master",
-    "precio": 349900,
-    "foto": "images/mouse-mx-master.jpg",
+    "sku": "PER-001",
+    "marca": "Maison Bruma",
+    "nombre": "Ámbar de Medianoche Eau de Parfum",
+    "precio": 189900,
+    "foto": "images/ambar-medianoche.jpg",
     "stock": 12,
     "activo": true,
-    "categoria": "Periféricos"
+    "categoria": "Perfumes"
   },
   {
-    "sku": "TEC-002",
-    "marca": "Kingston",
-    "nombre": "Memoria USB 64GB",
-    "precio": 39900,
-    "foto": "images/usb-kingston-64gb.jpg",
-    "stock": 40,
+    "sku": "PER-002",
+    "marca": "Jardín Secreto",
+    "nombre": "Rosa y Peonía Eau de Toilette",
+    "precio": 149900,
+    "foto": "images/rosa-peonia.jpg",
+    "stock": 18,
     "activo": true,
-    "categoria": "Almacenamiento"
+    "categoria": "Perfumes"
   },
   {
-    "sku": "AUD-001",
-    "marca": "Sony",
-    "nombre": "Audífonos WH-1000XM4",
-    "precio": 1199000,
-    "foto": "images/audifonos-sony.jpg",
+    "sku": "PER-003",
+    "marca": "Cítrico Atelier",
+    "nombre": "Bergamota Solar Eau de Parfum",
+    "precio": 219900,
+    "foto": "images/bergamota-solar.jpg",
+    "stock": 9,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-004",
+    "marca": "Botánica Nocturna",
+    "nombre": "Vainilla y Sándalo Eau de Parfum",
+    "precio": 199900,
+    "foto": "images/vainilla-sandalo.jpg",
+    "stock": 14,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-005",
+    "marca": "Costa de Luna",
+    "nombre": "Brisa Marina Eau de Toilette",
+    "precio": 129900,
+    "foto": "images/brisa-marina.jpg",
     "stock": 0,
     "activo": true,
-    "categoria": "Audio"
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-006",
+    "marca": "Maison Bruma",
+    "nombre": "Oud y Especias Eau de Parfum",
+    "precio": 289900,
+    "foto": "images/oud-especias.jpg",
+    "stock": 6,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-007",
+    "marca": "Versace",
+    "nombre": "Bright Crystal Eau de Toilette",
+    "precio": 379900,
+    "foto": "images/versace-bright-crystal.jpg",
+    "stock": 8,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-008",
+    "marca": "Versace",
+    "nombre": "Dylan Blue Pour Femme Eau de Parfum",
+    "precio": 429900,
+    "foto": "images/versace-dylan-blue-femme.jpg",
+    "stock": 5,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-009",
+    "marca": "Versace",
+    "nombre": "Eros Pour Homme Eau de Toilette",
+    "precio": 399900,
+    "foto": "images/versace-eros.jpg",
+    "stock": 7,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-010",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "Le Male Eau de Toilette",
+    "precio": 459900,
+    "foto": "images/jpg-le-male.jpg",
+    "stock": 6,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-011",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "Scandal Pour Homme Eau de Toilette",
+    "precio": 489900,
+    "foto": "images/jpg-scandal-pour-homme.jpg",
+    "stock": 4,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-012",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "La Belle Eau de Parfum",
+    "precio": 499900,
+    "foto": "images/jpg-la-belle.jpg",
+    "stock": 5,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-013",
+    "marca": "Lattafa",
+    "nombre": "Yara Eau de Parfum",
+    "precio": 169900,
+    "foto": "images/lattafa-yara.jpg",
+    "stock": 15,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-014",
+    "marca": "Lattafa",
+    "nombre": "Khamrah Eau de Parfum",
+    "precio": 219900,
+    "foto": "images/lattafa-khamrah.jpg",
+    "stock": 10,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-015",
+    "marca": "Lattafa",
+    "nombre": "Asad Eau de Parfum",
+    "precio": 179900,
+    "foto": "images/lattafa-asad.jpg",
+    "stock": 12,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-016",
+    "marca": "Versace",
+    "nombre": "Pour Homme Eau de Toilette",
+    "precio": 389900,
+    "foto": "images/versace-pour-homme.jpg",
+    "stock": 6,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-017",
+    "marca": "Versace",
+    "nombre": "Dylan Blue Pour Homme Eau de Toilette",
+    "precio": 419900,
+    "foto": "images/versace-dylan-blue-homme.jpg",
+    "stock": 8,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-018",
+    "marca": "Versace",
+    "nombre": "Crystal Noir Eau de Parfum",
+    "precio": 449900,
+    "foto": "images/versace-crystal-noir.jpg",
+    "stock": 4,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-019",
+    "marca": "Versace",
+    "nombre": "Yellow Diamond Eau de Toilette",
+    "precio": 369900,
+    "foto": "images/versace-yellow-diamond.jpg",
+    "stock": 5,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-028",
+    "marca": "Versace",
+    "nombre": "Eros Flame Eau de Parfum",
+    "precio": 429900,
+    "foto": "images/versace-eros-flame.jpg",
+    "stock": 6,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-020",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "Ultra Male Eau de Toilette Intense",
+    "precio": 479900,
+    "foto": "images/jpg-ultra-male.jpg",
+    "stock": 5,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-021",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "Le Male Le Parfum",
+    "precio": 529900,
+    "foto": "images/jpg-le-male-le-parfum.jpg",
+    "stock": 4,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-022",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "Scandal Pour Femme Eau de Parfum",
+    "precio": 499900,
+    "foto": "images/jpg-scandal-pour-femme.jpg",
+    "stock": 6,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-023",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "Classique Eau de Toilette",
+    "precio": 469900,
+    "foto": "images/jpg-classique.jpg",
+    "stock": 3,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-029",
+    "marca": "Jean Paul Gaultier",
+    "nombre": "Le Beau Le Parfum",
+    "precio": 529900,
+    "foto": "images/jpg-le-beau-le-parfum.jpg",
+    "stock": 4,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-024",
+    "marca": "Lattafa",
+    "nombre": "Fakhar Black Eau de Parfum",
+    "precio": 189900,
+    "foto": "images/lattafa-fakhar-black.jpg",
+    "stock": 11,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-025",
+    "marca": "Lattafa",
+    "nombre": "Bade'e Al Oud Oud for Glory",
+    "precio": 229900,
+    "foto": "images/lattafa-oud-for-glory.jpg",
+    "stock": 7,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-026",
+    "marca": "Lattafa",
+    "nombre": "Nebras Eau de Parfum",
+    "precio": 209900,
+    "foto": "images/lattafa-nebras.jpg",
+    "stock": 9,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-027",
+    "marca": "Lattafa",
+    "nombre": "Raghba Eau de Parfum",
+    "precio": 159900,
+    "foto": "images/lattafa-raghba.jpg",
+    "stock": 10,
+    "activo": true,
+    "categoria": "Perfumes"
+  },
+  {
+    "sku": "PER-030",
+    "marca": "Lattafa",
+    "nombre": "Maahir Legacy Eau de Parfum",
+    "precio": 199900,
+    "foto": "images/lattafa-maahir-legacy.jpg",
+    "stock": 8,
+    "activo": true,
+    "categoria": "Perfumes"
   }
 ]
